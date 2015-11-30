@@ -1,0 +1,54 @@
+form {
+    width: 80%;
+    margin: auto;
+}
+
+#wall {
+    margin-top: 20px;
+}
+
+.btn:not(.input-group-btn > .btn) {
+    float: right;
+    margin-left: 10px;
+    padding: 3px 12px;
+    border-radius: 2px;
+}
+
+.form-control {
+    border-radius: 2px;
+}
+
+.input-group-btn > .btn {
+    border-radius: 2px;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.list-group-item:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.label {
+    margin-top: 2px;
+    position: absolute;
+    right: 35px;
+}
+
+.list-group-item > .close {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+
+.close:focus, .close:hover {
+    outline: 0;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 2px;
+}

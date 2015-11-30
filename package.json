@@ -1,0 +1,36 @@
+{
+  "name": "chirp",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "something.git"
+  },
+  "description": "Class project for BA 531",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Mitcheal Lenski",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "boom": "^3.0.0",
+    "good": "^6.4.0",
+    "good-console": "^5.2.0",
+    "handlebars": "^4.0.5",
+    "hapi": "^11.1.1",
+    "hapi-auth-basic": "^4.1.0",
+    "hapi-auth-jwt2": "^5.2.1",
+    "inert": "^3.2.0",
+    "joi": "^7.0.0",
+    "jsonwebtoken": "^5.4.1",
+    "mongodb-uri": "^0.9.7",
+    "mongoose": "^4.2.6",
+    "vision": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.8.1"
+  },
+  "readme": "ERROR: No README data found!"
+}
