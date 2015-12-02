@@ -55,7 +55,6 @@ server.register(require('vision'), function(err){
 // register default auth method
 // server.auth.default('jwt');
 
-// hello world route
 server.route({
     method: 'GET',
     path: '/',

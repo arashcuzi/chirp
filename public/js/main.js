@@ -1,3 +1,7 @@
+// globals
+var update = false;
+var chirpId = '';
+
 var setAlert = function(message, type) {
     var alert = $('#alert');
 
@@ -56,10 +60,26 @@ var deleteChirp = function(elem) {
     return false;
 };
 
+var updateChirp = function(e) {
+    // if you click on delete, don't try to do update stuff
+    if (e.currentTarget !== e.target) {
+        return;
+    }
+
+    update = true;
+
+    // get chirp id saved on close button
+    chirpId = e.currentTarget.lastChild.dataset.id;
+
+    $('#chirp').val(e.currentTarget.innerHTML.split('<')[0]);
+};
+
 var follow = function(elem) {
     var data = {
         follow: elem.dataset.id
     };
+
+    console.log(JSON.stringify(data));
 
     $.ajax({
         method: 'PUT',
@@ -172,11 +192,14 @@ var buildWall = function(data) {
     chirps.forEach(function(val){
         var close = '';
         var labelClass = 'label-warning';
+        var ownChirp = '';
         if (user === val.userid) {
             labelClass = 'label-success';
+            ownChirp = 'own';
             close = '<button type="button" class="close pull-right" aria-label="Close" data-id=' + val.chirpid + '><span aria-hidden="true">×</span></button>';
         }
-        html += '<a href="#" class="list-group-item">' +
+        html += '<a href="#" class="list-group-item ' +
+            ownChirp + '">' +
             val.chirp + '<span class="pull-right label ' +
             labelClass + '">' +
             val.handle + '</span>' +
@@ -186,10 +209,13 @@ var buildWall = function(data) {
     // remove old click handler to prevent duplicate handlers
     $('#wall').off();
 
-    // rebind new click handler
+    // rebind new click handler for delete
     $('#wall').on('click', 'button.close', function(e){
         deleteChirp(e.currentTarget);
     });
+
+    // rebind new click handler for edit
+    $('#wall').on('click', 'a.own', updateChirp);
 
     $('#wall').html(html);
 };
@@ -203,7 +229,12 @@ var search = function() {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
     }).done(function(data){
-        buildWall(data);
+        if (data.length > 0) {
+            buildWall(data);
+        } else {
+            loadWall();
+            setAlert('No chirps found!', 'err');
+        }
     }).fail(function(err){
         setAlert(err.statusText, 'err');
     });
@@ -226,7 +257,6 @@ $('#register').on('click', function() {
     }).done(function(data){
         login();
     }).fail(function(err){
-        console.log(err);
         setAlert(err.statusText, 'err');
     });
 
@@ -236,23 +266,47 @@ $('#register').on('click', function() {
 $('#new-chirp').on('click', function() {
     var data = {
         chirp: $('#chirp').val(),
-        user: localStorage.getItem('userid')
     };
 
-    $.ajax({
-        method: 'POST',
-        url: '/chirps',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-    }).done(function(data){
-        $('#chirp').val('');
-        loadWall();
-    }).fail(function(err){
-        setAlert(err.statusText, 'err');
-    });
+    if (update) {
+        console.log(data);
+        console.log(JSON.stringify(data));
+        $.ajax({
+            method: 'PUT',
+            url: 'chirps/' + chirpId,
+            data: JSON.stringify(data),
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).done(function(){
+            console.log('updated');
+            loadWall();
+        }).fail(function(err){
+            setAlert(err.statusText, 'err');
+        });
+
+        update = false;
+
+        return false;
+
+    } else {
+        data.user = localStorage.getItem('userid');
+
+        $.ajax({
+            method: 'POST',
+            url: '/chirps',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).done(function(data){
+            $('#chirp').val('');
+            loadWall();
+        }).fail(function(err){
+            setAlert(err.statusText, 'err');
+        });
+    }
 });
 
 $('#login').on('click', login);
