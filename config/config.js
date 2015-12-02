@@ -1,6 +1,6 @@
 module.exports = {
     database: {
-        host: 'ds053874.mongolab.com:53874',
+        host: 'ds061954.mongolab.com:61954',
         port: 27010,
         db: 'chirps',
         username: 'user',
