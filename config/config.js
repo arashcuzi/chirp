@@ -7,8 +7,8 @@ module.exports = {
         password: 'user'
     },
     server: {
-        port: 3001,
-        host: '104.131.78.143'
+        port: 3000,
+        host: '127.0.0.1'
     },
     auth: {
         key: 'thisisaverysecurekeybecauseitisalongkey'

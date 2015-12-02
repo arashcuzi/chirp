@@ -1,25 +1,51 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="Chirp" src="img/chirp.png">
+            </a>
+        </div>
+        <form class="navbar-form navbar-right hidden-xs">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" id="search">
+                <span class="input-group-btn" id="search-button">
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+</nav>
+
+
 <div class="container text-center">
 
-    <div class="col-sm-3"></div>
+    <h1>Welcome to your Wall!</h1>
+    <h3>Follow on the left, chirp below, and search above!</h3>
 
-    <div class="col-sm-6">
-        <h1>Wall!</h1>
-        <h3>Welcome!</h3>
-
-        <div id="alert" class="alert fade" role="alert">This cool message</div>
-
-        <div class="input-group">
-            <input type="text" id="chirp" class="form-control" placeholder="New chirp...">
-            <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" id="new-chirp"><span class="glyphicon glyphicon-send"></span></button>
-            </span>
-        </div>
-
-        <ul class="list-group text-left" id="wall">
-        </ul>
+    <div class="row">
+        <div id="alert" class="alert fade col-sm-6 col-sm-offset-3" role="alert">This cool message</div>
     </div>
 
-    <div class="col-sm-3"></div>
+    <div class="row">
+        <div class="col-sm-4">
+            <ul class="list-group text-left" id="users">
+            </ul>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input type="text" id="chirp" class="form-control" placeholder="New chirp...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" id="new-chirp"><span class="glyphicon glyphicon-send"></span></button>
+                </span>
+            </div>
+
+            <ul class="list-group text-left" id="wall">
+            </ul>
+        </div>
+    </div>
 
 </div>
 

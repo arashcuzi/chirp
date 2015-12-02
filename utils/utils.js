@@ -21,7 +21,8 @@ function validate(request, username, password, callback) {
             callback(err, isValid, {
                 id: user._id,
                 handle: user.handle,
-                token: token
+                token: token,
+                user: user
             });
         });
     });
